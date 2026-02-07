@@ -41,16 +41,16 @@ class NotesRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                
+
                 DatePicker::make('note_date')
                     ->label('Note Date')
                     ->default(now())
                     ->required(),
-                
+
                 RichEditor::make('content')
                     ->required()
                     ->columnSpanFull()
-                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDisk('s3')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('public')
                     ->toolbarButtons([
@@ -70,7 +70,7 @@ class NotesRelationManager extends RelationManager
                         'undo',
                     ])
                     ->helperText('Write your meeting summary or project notes here with rich formatting.'),
-                
+
                 Hidden::make('created_by')
                     ->default(auth()->id()),
             ]);
@@ -85,15 +85,15 @@ class NotesRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->weight(FontWeight::Medium),
-                
+
                 TextColumn::make('note_date')
                     ->date('M d, Y')
                     ->sortable(),
-                
+
                 TextColumn::make('creator.name')
                     ->label('Created by')
                     ->sortable(),
-                
+
                 TextColumn::make('created_at')
                     ->dateTime('M d, Y H:i')
                     ->sortable()
@@ -101,7 +101,7 @@ class NotesRelationManager extends RelationManager
             ])
             ->filters([
                 Filter::make('recent')
-                    ->query(fn ($query) => $query->where('created_at', '>=', now()->subDays(30)))
+                    ->query(fn($query) => $query->where('created_at', '>=', now()->subDays(30)))
                     ->label('Recent (30 days)'),
             ])
             ->headerActions([
@@ -109,8 +109,7 @@ class NotesRelationManager extends RelationManager
                     ->icon('heroicon-o-plus')
                     ->label('Add Note')
                     ->modalWidth('2xl')
-                    ->closeModalByClickingAway(false)
-                    ,
+                    ->closeModalByClickingAway(false),
             ])
             ->recordActions([
                 ViewAction::make()

@@ -56,7 +56,7 @@ class ProjectResource extends Resource
                     ->maxLength(255),
                 RichEditor::make('description')
                     ->columnSpanFull()
-                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDisk('s3')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsAcceptedFileTypes(['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'video/mp4'])
                     ->fileAttachmentsVisibility('public'),
@@ -127,10 +127,7 @@ class ProjectResource extends Resource
                     ->badge()
                     ->color(
                         fn(Project $record): string =>
-                        $record->progress_percentage >= 100 ? 'success' :
-                        ($record->progress_percentage >= 75 ? 'info' :
-                            ($record->progress_percentage >= 50 ? 'warning' :
-                                ($record->progress_percentage >= 25 ? 'gray' : 'danger')))
+                        $record->progress_percentage >= 100 ? 'success' : ($record->progress_percentage >= 75 ? 'info' : ($record->progress_percentage >= 50 ? 'warning' : ($record->progress_percentage >= 25 ? 'gray' : 'danger')))
                     )
                     ->sortable(),
                 TextColumn::make('start_date')
@@ -151,9 +148,7 @@ class ProjectResource extends Resource
                     ->badge()
                     ->color(
                         fn(Project $record): string =>
-                        !$record->end_date ? 'gray' :
-                        ($record->remaining_days <= 0 ? 'danger' :
-                            ($record->remaining_days <= 7 ? 'warning' : 'success'))
+                        !$record->end_date ? 'gray' : ($record->remaining_days <= 0 ? 'danger' : ($record->remaining_days <= 7 ? 'warning' : 'success'))
                     ),
                 ToggleColumn::make('is_pinned')
                     ->label('Pinned')

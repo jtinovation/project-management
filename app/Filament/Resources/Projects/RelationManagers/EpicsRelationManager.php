@@ -48,7 +48,7 @@ class EpicsRelationManager extends RelationManager
                     ->nullable(),
                 RichEditor::make('description')
                     ->columnSpanFull()
-                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDisk('s3')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('public')
                     ->nullable(),

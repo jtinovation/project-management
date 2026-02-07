@@ -32,7 +32,7 @@ class ViewTicket extends ViewRecord
                 RichEditor::make('comment')
                     ->label('Edit Comment')
                     ->required()
-                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDisk('s3')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('public')
                     ->extraInputAttributes(['style' => 'min-height: 10rem;']),

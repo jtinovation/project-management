@@ -27,7 +27,7 @@ class TicketCommentForm extends Component implements HasForms, HasActions
                 RichEditor::make('newComment')
                     ->label('Add a Comment')
                     ->placeholder('Write your comment here...')
-                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDisk('s3')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('public')
                     ->required()
