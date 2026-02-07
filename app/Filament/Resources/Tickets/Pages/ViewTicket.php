@@ -231,7 +231,13 @@ class ViewTicket extends ViewRecord
                             ->html()
                             ->prose()
                             ->getStateUsing(function (Ticket $record) {
-                                return $this->convertVideoImgsToVideoTags($record->description);
+                                $standardHtml = \Filament\Forms\Components\RichEditor\RichContentRenderer::make(
+                                    $record->description,
+                                )
+                                    ->fileAttachmentsDisk('s3')
+                                    ->fileAttachmentsVisibility('public')
+                                    ->toHtml();
+                                return $this->convertVideoImgsToVideoTags($standardHtml);
                             })
                             ->columnSpanFull()
                             ->placeholder('No description provided'),
