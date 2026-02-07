@@ -143,7 +143,8 @@ class TicketResource extends Resource
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsAcceptedFileTypes(['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'video/mp4'])
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->toHtml(),
 
                 // // Multi-user assignment
                 Select::make('assignees')
