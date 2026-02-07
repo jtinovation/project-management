@@ -92,7 +92,7 @@
                                     )
                                         ->fileAttachmentsDisk('s3')
                                         ->fileAttachmentsVisibility('public')
-                                        ->render();
+                                        ->toHtml();
 
                                     echo convertVideoImgsToVideoTags($standardHtml);
                                 @endphp
